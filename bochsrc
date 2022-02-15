@@ -1,0 +1,21 @@
+megs:                            32
+display_library:                 sdl2
+romimage:                        file=/usr/share/bochs/BIOS-bochs-latest # /usr/local/Cellar/bochs/2.6.9_2/share/bochs/BIOS-bochs-latest # /usr/share/bochs
+vgaromimage:                     file=/usr/share/bochs/VGABIOS-lgpl-latest # /usr/local/Cellar/bochs/2.6.9_2/share/bochs/VGABIOS-lgpl-latest
+
+ata0-master:                     type=cdrom, path=./build/os.iso, status=inserted
+boot:                            cdrom
+
+log:                             bochslog.txt
+clock:                           sync=realtime, time0=local
+cpu:                             count=1, ips=1000000
+
+com1:                            enabled=1, mode=file, dev=com1.out
+
+#speaker: mode=sound
+#debug: action=ignore
+#info: action=report, pic=report
+#error: action=report
+#panic: action=ask
+
+#display_library: x, options="gui_debug"
