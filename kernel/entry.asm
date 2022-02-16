@@ -1,18 +1,27 @@
-global _start
+global entry ; the entry point for our kernel.elf file
 
-section .text
+; todo : move multiboot2 handling to separate file
+MAGIC_NUMBER  equ 0xE85250D6    ; define the magic number constant
+ARCHITECTURE  equ 0x0           ; i32 
 
-_start:
-  mov rax, 1        ; write(
-  mov rdi, 1        ;   STDOUT_FILENO,
-  mov rsi, msg      ;   "Hello, world!\n",
-  mov rdx, msglen   ;   sizeof("Hello, world!\n")
-  syscall           ; );
+section .text ; start of the code section
+align 8 ; align with 64 bit boundary
+multiboot_header:
+  dd MAGIC_NUMBER
+  dd ARCHITECTURE
+  dd multiboot_header_end - multiboot_header ; header length
+  dd -(MAGIC_NUMBER + ARCHITECTURE + (multiboot_header_end - multiboot_header)) ; the checksum
+  ; the magic number plus the architexture plus the header length plus the checksum should be 0
 
-  mov rax, 60       ; exit(
-  mov rdi, 0        ;   EXIT_SUCCESS
-  syscall           ; );
+  multiboot_tags:
+  ; nothing yet, so terminate it
+  dw 0x0
+  dw 0x0
+  dd 0x8
+multiboot_header_end:
+align 4
 
-section .rodata
-  msg: db "Hello, world!", 10
-  msglen: equ $ - msg
+entry:
+  mov eax, 0xCAFEBABE ; tells us that the operating system has initialized correctly
+.loop:
+  jmp .loop ; loops forever. basically so that we can inspect eax in bochs
