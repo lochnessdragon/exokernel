@@ -1,1 +1,1 @@
-qemu-system-x86_64 -cdrom build/os.iso
+qemu-system-x86_64 -cdrom build/os.iso -monitor stdio

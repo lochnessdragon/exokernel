@@ -3,7 +3,8 @@
 
 cmake_minimum_required(VERSION 3.0.0)
 
-option(BUILD_HARD_DRIVE "Instead of building a cd iso image, build a bootable hard disk image")
+option(BUILD_ISO "Build an iso file" ON)
+option(BUILD_HDD "Build a hard drive image" ON)
 
 project(kernel)
 
@@ -30,11 +31,13 @@ target_compile_options(kernel.elf PRIVATE
 # make sure to link with the custom script and strip the files!
 target_link_options(kernel.elf PRIVATE -T${CMAKE_SOURCE_DIR}/kernel/link.ld -s)
 
-add_custom_target(os ALL 
+if(BUILD_ISO)
+	add_custom_target(os-iso ALL 
      COMMAND mkdir -p iso/boot/grub
      COMMAND cp kernel.elf iso/boot/
-     COMMAND cp ../boot/grub.cfg iso/boot/grub
+     COMMAND cp ${CMAKE_SOURCE_DIR}/boot/grub.cfg iso/boot/grub
      COMMAND grub-mkrescue -o os.iso iso/
      BYPRODUCTS os.iso
      DEPENDS kernel.elf
      VERBATIM)
+endif()
