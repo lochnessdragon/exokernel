@@ -1,0 +1,8 @@
+label: dos
+label-id: 0xf9ccdf74
+device: os.img
+unit: sectors
+
+os.img1 : start=        2048, size=      129024, type=83, bootable
+
+write

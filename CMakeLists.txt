@@ -33,6 +33,7 @@ target_link_options(kernel.elf PRIVATE -T${CMAKE_SOURCE_DIR}/kernel/link.ld -s)
 
 if(BUILD_ISO)
 	add_custom_target(os-iso ALL 
+     COMMAND echo Building cd-rom image
      COMMAND mkdir -p iso/boot/grub
      COMMAND cp kernel.elf iso/boot/
      COMMAND cp ${CMAKE_SOURCE_DIR}/boot/grub.cfg iso/boot/grub
@@ -40,4 +41,14 @@ if(BUILD_ISO)
      BYPRODUCTS os.iso
      DEPENDS kernel.elf
      VERBATIM)
+endif()
+
+if(BUILD_HDD)
+     add_custom_target(os-hdd ALL
+          COMMAND echo Building harddisk image
+          COMMAND cp ../configure-hd/fdisk_script ./
+          COMMAND ../configure-hd/generate_hdd.sh
+          BYPRODUCTS os.img 
+          DEPENDS kernel.elf 
+          VERBATIM)
 endif()
