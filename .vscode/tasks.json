@@ -1,0 +1,91 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "cmake --build .",
+            "options": {
+                "cwd": "${workspaceFolder}/build/"
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "bochs",
+            "type": "shell",
+            "command": "bochs -f bochsrc.txt",
+            "presentation": {
+                "echo": false,
+                "clear": true,
+                "group": "vm"
+            },
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "pattern": [
+                        {
+                            "regexp": ".",
+                            "file": 1,
+                            "location": 2,
+                            "message": 3
+                        }
+                    ],
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": ".",
+                        "endsPattern": ".",
+                    }
+                }
+            ]
+        },
+        {
+            "label": "qemu for gdb",
+            "type": "shell",
+            "command": "qemu-system-x86_64 -cdrom build/os.iso -monitor stdio -s",
+            "presentation": {
+                "echo": true,
+                "clear": true,
+                "group": "vm"
+            },
+            "dependsOn" : "build",
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "pattern": [
+                        {
+                            "regexp": ".",
+                            "file": 1,
+                            "location": 2,
+                            "message": 3
+                        }
+                    ],
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": ".",
+                        "endsPattern": ".",
+                    }
+                }
+            ]
+        }
+    ]
+}

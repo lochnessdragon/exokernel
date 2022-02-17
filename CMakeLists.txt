@@ -28,8 +28,8 @@ target_compile_options(kernel.elf PRIVATE
      $<$<CXX_COMPILER_ID:MSVC>:
           /W4>)
 
-# make sure to link with the custom script and strip the files!
-target_link_options(kernel.elf PRIVATE -T${CMAKE_SOURCE_DIR}/kernel/link.ld -s)
+# make sure to link with the custom script and strip the files! (-s to strip files maybe add to release candidate)
+target_link_options(kernel.elf PRIVATE -T${CMAKE_SOURCE_DIR}/kernel/link.ld)
 
 if(BUILD_ISO)
 	add_custom_target(os-iso ALL 

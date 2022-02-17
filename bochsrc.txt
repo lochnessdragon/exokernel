@@ -12,6 +12,9 @@ cpu:                             count=1, ips=1000000
 
 com1:                            enabled=1, mode=file, dev=com1.out
 
+# enable debugging with gdb (if only it was compiled with gdb stub support)
+# gdbstub:                         enabled=1, port=1234, text_base=0, data_base=0, bss_base=0
+
 #speaker: mode=sound
 #debug: action=ignore
 #info: action=report, pic=report
