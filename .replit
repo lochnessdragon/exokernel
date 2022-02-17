@@ -1,2 +1,2 @@
 language = "nix"
-run = "mkdir -p build && cd build && cmake ../ && cmake --build . && cd ../ && ./run_os_qemu.sh"
+run = "mkdir -p build && cd build && cmake -DBUILD_HDD=OFF ../ && cmake --build . && cd ../ && ./run_os_qemu.sh"
