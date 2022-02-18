@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.0.0)
 option(BUILD_ISO "Build an iso file" ON)
 option(BUILD_HDD "Build a hard drive image" ON)
 
-option(CI "Option should only be on on CI servers." OFF)
+option(CI "Option should be on only on CI servers." OFF)
 if(CI)
 set(BUILD_ISO OFF)
 set(BUILD_HDD OFF)
