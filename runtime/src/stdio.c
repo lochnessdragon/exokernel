@@ -3,13 +3,38 @@
 
 #ifdef __kernel_libk
 #include <driver/vga/vga.h>
+#else
+#include <unistd.h>
+#endif
+// define stdio
+#ifndef __kernel_libk
+FILE __STDIN__ = {
+	0
+};
+FILE __STDOUT__ = {
+	1
+};
+FILE __STDERR__ = {
+	2
+};
+
+FILE* __STDIN=&__STDIN__;
+FILE* __STDOUT=&__STDOUT__;
+FILE* __STDERR=&__STDERR__;
+#endif
+
+// file operations functions
+#ifndef __kernel_libk
+int remove(const char* filename) {
+	return unlink(filename);
+}
 #endif
 
 int putchar(int c) {
     #ifdef __kernel_libk
     vga_append_char(c);
     #else 
-    #error This runtime library function doesnt work outside of a kernel environment
+    write((*stdout).fd, &c, 1);
     #endif
     return 1;
 }

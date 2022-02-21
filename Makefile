@@ -14,10 +14,11 @@ AS=nasm
 ASFLAGS=-f elf32
 
 LD=ld
-LFLAGS=-s
+LFLAGS=
 
 CC=gcc 
-CFLAGS=-m32 -Iruntime/include/ -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -fno-pie -Wall -Wextra -Werror -mno-red-zone
+CFLAGS=
+K32_CFLAGS=-m32 -Iruntime/include/ -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -fno-pie -Wall -Wextra -Werror -mno-red-zone
 
 OBJDIR=build-int/
 BINDIR=build/
