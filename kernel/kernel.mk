@@ -15,15 +15,15 @@ KERNEL_OBJS := $(KERNEL_C_OBJS) $(KERNEL_ASM_OBJS) $(RUNTIME_BINDIR)libk.a
 $(KERNEL_C_OBJS): $(KERNEL_OBJDIR)%.o : $(KERNEL_SRCDIR)%.c
 	$(dir_guard)
 	$(CC) $(CFLAGS) $(KERNEL_CFLAGS) -c $< -o $@
-	@echo "Compiled "$<" successfully!"
+	@echo $(COLOR_COMPILE)"Compiled"$(COLOR_CLR) $(COLOR_FILE)$<$(COLOR_CLR) "successfully!"$(COLOR_CLR)
 
 $(KERNEL_ASM_OBJS): $(KERNEL_OBJDIR)%.o: $(KERNEL_SRCDIR)%.asm
 	$(dir_guard)
 	$(AS) $(ASFLAGS) $(KERNEL_ASFLAGS) $< -o $@
-	@echo "Compiled "$<" successfully!"
+	@echo $(COLOR_COMPILE)"Compiled"$(COLOR_CLR) $(COLOR_FILE2)$<$(COLOR_CLR) $(COLOR_COMPILE)"successfully!"$(COLOR_CLR)
 
 $(KERNEL_BINDIR)kernel.elf: $(KERNEL_OBJS)
 	$(dir_guard)
 	echo $(KERNEL_C_SOURCES)
 	$(LD) $(LFLAGS) $(KERNEL_LFLAGS) -o $@ $^
-	@echo "Linked the kernel successfully!"
+	@echo $(COLOR_LINK)"Linked the kernel successfully!"$(COLOR_CLR)

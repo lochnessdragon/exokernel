@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "qemu for gdb",
-            "program": "${workspaceRoot}/build/kernel.elf",
+            "program": "${workspaceRoot}/build/kernel/kernel.elf",
             "miDebuggerServerAddress": "localhost:1234",
             "args": [],
             "stopAtEntry": true,

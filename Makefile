@@ -2,7 +2,9 @@
 COLOR_COMPILE='\033[1;32m'
 COLOR_LINK='\033[1;95m'
 COLOR_FILE='\033[4;94m'
+COLOR_FILE2='\033[4;93m'
 COLOR_CLR='\033[0m'
+COLOR_SUCCESS='\033[1;36m'
 
 # sets the folders to use to place object files and the final output
 BINDIR=build/
@@ -40,7 +42,7 @@ $(BINDIR)os.iso: $(KERNEL_BINDIR)kernel.elf
 	@cp $(KERNEL_BINDIR)kernel.elf $(BINDIR)iso/boot/
 	@cp boot/grub.cfg $(BINDIR)iso/boot/grub
 	@grub-mkrescue -o $(BINDIR)os.iso $(BINDIR)iso/
-	@echo Made os iso image!
+	@echo $(COLOR_SUCCESS)Made os iso image!$(COLOR_CLR) 🚀 # yes <- that is a utf-8 string.
 
 # commands to run the emulators
 .PHONY:
@@ -56,4 +58,3 @@ qemu:
 clean:
 	rm -rf $(OBJDIR)
 	rm -rf $(BINDIR)
-	rm -rf $(OUTPUTDIR)
