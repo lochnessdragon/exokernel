@@ -20,36 +20,39 @@ char* fb = (char*)VGA_MEM;
 unsigned char cursor_x = 0;
 unsigned char cursor_y = 0;
 
-void vga_write_cell(char c, char attrib_byte) {
+void vga_set_cell(char c, char attrib_byte) {
     int offset = (cursor_x*2) + (cursor_y * COLS * 2);
 
     fb[offset] = c;
     fb[offset+1] = attrib_byte;
 }
 
+void vga_append_char(char c) {
+    if(c == '\n') {
+        cursor_x = 0;
+        cursor_y++;
+        return;
+    }
+
+    if(cursor_y >= LINES) {
+		cursor_y = 0;
+	}
+
+	vga_set_cell (c, TEXT_ATTRIB);
+	cursor_x++;
+	if(cursor_x >= COLS) {
+		cursor_x = 0;
+		cursor_y++;
+	}
+
+    vga_hardware_cursor(cursor_x, cursor_y);
+}
+
 void vga_write(const char* string, int len) {
     // write to the vga
     for(int i = 0; i < len; i++) {
-        if(string[i] == '\n') {
-            cursor_x = 0;
-            cursor_y++;
-            continue;
-        }
-
-        if(cursor_y >= LINES) {
-			cursor_y = 0;
-		}
-
-		vga_write_cell (string[i], TEXT_ATTRIB);
-		cursor_x++;
-		if(cursor_x >= COLS) {
-			cursor_x = 0;
-			cursor_y++;
-		}
-
+        vga_append_char(string[i]);
     }
-
-    vga_hardware_cursor(cursor_x, cursor_y);
 }
 
 void vga_hardware_cursor(unsigned char x, unsigned char y) {

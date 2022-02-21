@@ -1,9 +1,9 @@
 #include <string.h>
+#include <stdio.h>
 #include <driver/vga/vga.h>
 
 void kmain() {
-    const char* msg = "Kernel jumped to C okay!\n";
-    vga_write(msg, strlen(msg));
+    puts("[ OK ] Kernel jumped to C okay!");
 
     // now we have to get to x86_64...
 }
