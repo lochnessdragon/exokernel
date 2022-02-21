@@ -21,7 +21,7 @@ entry:
   ;mov eax, 0xCAFEBABE ; tells us that the operating system has initialized correctly
   ; initialize the stack
   mov esp, kernel_stack + KERNEL_STACK_SIZE   ; point esp to the start of the stack.
-
+  mov word [0x000B8000], 0x2841 ; show one char
   ; jump to a c function
   call kmain
   cli

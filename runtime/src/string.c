@@ -40,6 +40,7 @@ size_t strlen(const char* str) {
     while(c != '\0') {
         str++;
         c=*str;
+        count++;
     }
 
     return count;
