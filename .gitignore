@@ -53,6 +53,7 @@ dkms.conf
 
 # CMake build folder
 build/
+build-int/
 
 # bochs debug files
 bochslog.txt

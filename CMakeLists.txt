@@ -12,6 +12,8 @@ set(BUILD_ISO OFF)
 set(BUILD_HDD OFF)
 endif()
 
+add_subdirectory(runtime/)
+
 project(kernel)
 
 enable_language(ASM_NASM)
@@ -20,22 +22,21 @@ enable_language(ASM_NASM)
 file(GLOB_RECURSE KASMSRC "kernel/*.asm")
 set_property(SOURCE ${KASMSRC} PROPERTY LANGUAGE ASM_NASM)
 set(CMAKE_ASM_NASM_LINK_EXECUTABLE "ld <CMAKE_ASM_NASM_LINK_FLAGS> <LINK_FLAGS> <OBJECTS>  -o <TARGET> <LINK_LIBRARIES>")
-set(CMAKE_ASM_NASM_OBJECT_FORMAT elf64)
+set(CMAKE_ASM_NASM_COMPILE_OBJECT "<CMAKE_ASM_NASM_COMPILER> <INCLUDES> <FLAGS> -o <OBJECT> <SOURCE>")
+set(CMAKE_ASM_NASM_OBJECT_FORMAT elf32)
+set(CMAKE_ASM_NASM_FLAGS "${CMAKE_ASM_NASM_FLAGS} -f ${CMAKE_ASM_NASM_OBJECT_FORMAT}")
 
-file(GLOB KCSRC "kernel/*.c")
+file(GLOB_RECURSE KCSRC "kernel/*.c")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -fno-pie -mno-red-zone")
 
 set(KFILES ${KASMSRC} ${KCSRC})
 
 add_executable(kernel.elf ${KFILES})
-target_include_directories(kernel.elf PRIVATE ${CMAKE_SOURCE_DIR}/kernel/common/ ${CMAKE_SOURCE_DIR}/kernel/arch/i386/)
-target_compile_options(kernel.elf PRIVATE
-     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
-          -Wall>
-     $<$<CXX_COMPILER_ID:MSVC>:
-          /W4>)
 
+target_include_directories(kernel.elf PRIVATE ${CMAKE_SOURCE_DIR}/kernel/common/ ${CMAKE_SOURCE_DIR}/kernel/arch/i386/ ${CMAKE_SOURCE_DIR}/kernel/ ${CMAKE_SOURCE_DIR}/runtime/include)
+target_link_libraries(kernel.elf k)
 # make sure to link with the custom script and strip the files! (-s to strip files maybe add to release candidate)
-target_link_options(kernel.elf PRIVATE -T${CMAKE_SOURCE_DIR}/kernel/link.ld)
+target_link_options(kernel.elf PRIVATE -T${CMAKE_SOURCE_DIR}/kernel/link.ld -fno-pie)
 
 if(BUILD_ISO)
 	add_custom_target(os-iso ALL 
