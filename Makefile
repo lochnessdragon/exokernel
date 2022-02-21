@@ -23,6 +23,9 @@ OBJDIR=build-int/
 BINDIR=build/
 
 dir_guard=@mkdir -p $(@D)
+link_msg=@echo $(COLOR_LINK)"Linking:"$(COLOR_CLR) $(COLOR_FILE)$@$(COLOR_CLR)
+compile_msg=@echo $(COLOR_COMPILE)"Compiled"$(COLOR_CLR) $(COLOR_FILE)$<$(COLOR_CLR) $(COLOR_COMPILE)"successfully!"$(COLOR_CLR)
+
 # recursive wildcard
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2)$(filter $(subst *,%,$2), $d))
 
@@ -58,3 +61,7 @@ qemu:
 clean:
 	rm -rf $(OBJDIR)
 	rm -rf $(BINDIR)
+
+.PHONY:
+check: $(BINDIR)stdctests
+	$(BINDIR)stdctests
