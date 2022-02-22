@@ -3,11 +3,16 @@ RUNTIMEK_OBJDIR:=$(OBJDIR)$(dir)libk/
 RUNTIMEC_OBJDIR:=$(OBJDIR)$(dir)libc/
 RUNTIME_SOURCES:=$(call rwildcard,$(RUNTIME_SRCDIR),*.c)
 RUNTIMEK_OBJS:=$(RUNTIME_SOURCES:$(RUNTIME_SRCDIR)%.c=$(RUNTIMEK_OBJDIR)%.o)
-RUNTIMEC_OBJS:=$(RUNTIME_SOURCES:$(RUNTIME_SRCDIR)%.c=$(RUNTIMEC_OBJDIR)%.o)
+RUNTIMEC_ASM:=$(call rwildcard,$(RUNTIME_SRCDIR),*.asm)
+RUNTIMEC_COBJS:=$(RUNTIME_SOURCES:$(RUNTIME_SRCDIR)%.c=$(RUNTIMEC_OBJDIR)%.o)
+RUNTIMEC_ASMOBJS:=$(RUNTIMEC_ASM:$(RUNTIME_SRCDIR)%.asm=$(RUNTIMEC_OBJDIR)%.o)
+RUNTIMEC_OBJS:=$(RUNTIMEC_COBJS) $(RUNTIMEC_ASMOBJS)
 RUNTIME_BINDIR:=$(BINDIR)$(dir)
 
 RUNTIMEK_CFLAGS:=-Ikernel/ -D__kernel_libk
 RUNTIMEC_CFLAGS:=-I$(dir)include/ -nostdlib -fno-builtin
+
+RUNTIMEC_ASFLAGS:=-f elf64
 
 # for kernel libk compilation
 $(RUNTIMEK_OBJDIR)%.o: $(RUNTIME_SRCDIR)%.c 
@@ -20,6 +25,12 @@ $(RUNTIMEC_OBJDIR)%.o: $(RUNTIME_SRCDIR)%.c
 	$(dir_guard)
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(RUNTIMEC_CFLAGS) $< -o $@
 	$(compile_msg)
+
+# compiling assembly
+$(RUNTIMEC_OBJDIR)%.o: $(RUNTIME_SRCDIR)%.asm 
+	$(dir_guard)
+	$(AS) $(ASFLAGS) $(RUNTIMEC_ASFLAGS) $< -o $@
+	$(compile_asm_msg)
 
 $(RUNTIME_BINDIR)libk.a: $(RUNTIMEK_OBJS)
 	$(dir_guard)

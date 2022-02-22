@@ -11,14 +11,14 @@ BINDIR=build/
 INTDIR=build-int/
 
 AS=nasm
-ASFLAGS=-f elf32
+ASFLAGS=
 
 LD=ld
 LFLAGS=
 
 CC=gcc 
 CFLAGS=
-K32_CFLAGS=-m32 -Iruntime/include/ -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -fno-pie -Wall -Wextra -Werror -mno-red-zone
+K32_CFLAGS=-m32 -Iruntime/include/ -ffreestanding -fno-stack-protector -nostartfiles -nodefaultlibs -fno-pie -Wall -Wextra -Werror -mno-red-zone -mno-mmx -mno-sse -mno-sse2
 
 OBJDIR=build-int/
 BINDIR=build/
@@ -26,6 +26,7 @@ BINDIR=build/
 dir_guard=@mkdir -p $(@D)
 link_msg=@echo $(COLOR_LINK)"Linking:"$(COLOR_CLR) $(COLOR_FILE)$@$(COLOR_CLR)
 compile_msg=@echo $(COLOR_COMPILE)"Compiled"$(COLOR_CLR) $(COLOR_FILE)$<$(COLOR_CLR) $(COLOR_COMPILE)"successfully!"$(COLOR_CLR)
+compile_asm_msg=@echo $(COLOR_COMPILE)"Compiled"$(COLOR_CLR) $(COLOR_FILE2)$<$(COLOR_CLR) $(COLOR_COMPILE)"successfully!"$(COLOR_CLR)
 
 # recursive wildcard
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2)$(filter $(subst *,%,$2), $d))
@@ -46,7 +47,7 @@ $(BINDIR)os.iso: $(KERNEL_BINDIR)kernel.elf
 	@cp $(KERNEL_BINDIR)kernel.elf $(BINDIR)iso/boot/
 	@cp boot/grub.cfg $(BINDIR)iso/boot/grub
 	@grub-mkrescue -o $(BINDIR)os.iso $(BINDIR)iso/
-	@echo $(COLOR_SUCCESS)Made os iso image!$(COLOR_CLR) 🚀 # yes <- that is a utf-8 string.
+	@echo $(COLOR_SUCCESS)Made os iso image!$(COLOR_CLR) 🚀 # <- yes, that is an emoji
 
 # commands to run the emulators
 .PHONY:
