@@ -10,5 +10,8 @@ bool can_use_cpuid() {
 }
 
 bool is_x86_64_available() {
-	return true;
+	unsigned int eax, ebx, ecx, edx = 0;
+	__get_cpuid(0x80000001, &eax, &ebx, &ecx, &edx);
+	
+	return edx & bit_LM; // check for long mode
 }
