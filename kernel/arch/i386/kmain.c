@@ -3,20 +3,31 @@
 #include <driver/vga/vga.h>
 #include "gdt.h"
 #include <common/multiboot2.h>
+#include "compat_checks.h"
 
 void kmain(unsigned long multiboot_addr, unsigned int magic)
 {
     struct multiboot_tag *tag;
     uint32_t multiboot_size;
 
-    puts("[ OK ] Kernel jumped to C okay!");
-
+		// check if we were loaded by a multiboot compliant bootloader.
     if (magic != MULTIBOOT2_BOOTLOADER_MAGIC)
     {
         puts("[ ERR ] The kernel must be loaded by a multiboot2 complaint bootloader!");
         return;
     }
 
+		if(!can_use_cpuid()) {
+			puts("[ ERR ] CPUID is not supported, so we can not check the processor for supported features!");
+			return;
+		}
+		
+		// check if x64 is available
+		if(!is_x86_64_available()) {
+			puts("[ ERR ] x64 is not available on this computer, please install the exokernel on a computer with the amd64 architecture.");
+			return;
+		}
+	
     // extract relevant info from the multiboot header
     multiboot_size = *((uint32_t *)multiboot_addr);
     printf("Multiboot size is: 0x%x bytes\n", multiboot_size);
