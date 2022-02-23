@@ -51,11 +51,11 @@ $(BINDIR)os.iso: $(KERNEL_BINDIR)kernel.elf
 
 # commands to run the emulators
 .PHONY:
-bochs:
+bochs: $(BINDIR)os.iso
 	bochs -f bochsrc.txt
 
 .PHONY:
-qemu:
+qemu: $(BINDIR)os.iso
 	qemu-system-x86_64 -cdrom build/os.iso -monitor stdio
 	@echo
 
