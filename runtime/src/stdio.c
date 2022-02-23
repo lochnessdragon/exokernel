@@ -51,19 +51,9 @@ int puts(const char *s) {
     return 1;
 }
 
-int printint(int x, unsigned int base) {
+int printint(int x, unsigned int base, bool isSigned) {
     char buffer[20] = {0};
-    int str_len = sitoa(buffer, x, base);
-    for(int i = 0; i < str_len; i++) {
-        putchar(buffer[i]);
-    }
-
-    return str_len;
-}
-
-int printuint(unsigned int x, unsigned int base) {
-    char buffer[20] = {0};
-    int str_len = uitoa(buffer, x, base);
+    int str_len = itoa(buffer, x, base, isSigned);
     for(int i = 0; i < str_len; i++) {
         putchar(buffer[i]);
     }
@@ -93,17 +83,17 @@ int printf(const char* restrict fmt, ...) {
                     break;
                 case 'd':
                 case 'i':
-                    count += printint(va_arg(args, int), 10);
+                    count += printint(va_arg(args, int), 10, true);
                     break;
                 case 'o':
-                    count += printuint(va_arg(args, unsigned int), 8);
+                    count += printint(va_arg(args, unsigned int), 8, false);
                     break;
                 case 'u':
-                    count += printuint(va_arg(args, unsigned int), 10);
+                    count += printint(va_arg(args, unsigned int), 10, false);
                     break;
                 case 'x':
                 case 'X':
-                    count += printuint(va_arg(args, unsigned int), 16);
+                    count += printint(va_arg(args, unsigned int), 16, false);
                     break;
                 case 's':
                     str_buf = va_arg(args, char*);

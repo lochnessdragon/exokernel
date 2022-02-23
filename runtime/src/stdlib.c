@@ -9,65 +9,39 @@ void exit(int status) {
 }
 #endif
 
-int sitoa(char* buffer, int x, unsigned int base) {
-    char symbols[] = "0123456789abcdef";
-    if (base >= sizeof(symbols) || base <= 1) return -1;
-
-    char *buffer_start = buffer;
-    int is_positive = x >= 0;
-    // absolute value, unsigned because -INT_MIN is ub 
-    //unsigned int number_a = is_positive ? (unsigned int)x : -((unsigned int)x); 
-
-    // always do the first digit, so that zero is not the empty string
-    do
-    {
-        *buffer = symbols[x % base];
-        x /= base;
-        buffer++;
-    } while (x); 
-
-    *buffer = '-'; // this will be overwritten by the null if the number is positive
-    buffer -= is_positive;
-    int length = (int)(buffer - buffer_start + 1);
-    buffer[1] = '\0';
-    
-    // reverse the string (leaving the null in place)
-    while (buffer > buffer_start)
-    {
-        char temp = *buffer_start;
-        *(buffer_start++) = *buffer;
-        *(buffer--) = temp;
-    }
-
-    return length;
+int abs(int x) {
+	return x * ((x < 0) ? -1 : 1);
 }
 
-int uitoa(char *buffer, unsigned int number, unsigned int base)
-{
-    char symbols[] = "0123456789abcdef";
-    if (base >= sizeof(symbols) || base <= 1) return -1;
+int itoa(char* buffer, int x, unsigned int base, bool isSigned) {
+	char symbols[] = "0123456789abcdef";
 
-    char *buffer_start = buffer;
-    
-    // always do the first digit, so that zero is not the empty string
-    do
-    {
-        *buffer = symbols[number % base];
-        number /= base;
-        buffer++;
-    } while (number); 
+	// error checking code to make sure that the base is in the range 2-16 2 = binary, 16 = hexadecimal
+	if (base >= sizeof(symbols) || base <= 1) return 0;
 
-    int length = (int)(buffer - buffer_start);
-    *buffer = '\0';
-    buffer--;
+	char *buf_start = buffer;
+	int is_positive = x >= 0 || !isSigned;
+	unsigned int absx = abs(x);
 
-    // reverse the string (leaving the null in place)
-    while (buffer > buffer_start)
-    {
-        char temp = *buffer_start;
-        *(buffer_start++) = *buffer;
-        *(buffer--) = temp;
-    }
+	// always do the first digit, so that a zero is not an empty string
+	// this loop inserts the characters in a reverse order, therfore, it must be reversed later to get the string in the right order.
+	do {
+		*buffer = symbols[absx % base];
+		absx /= base;
+		buffer++;
+	} while(absx);
 
-    return length;
+	*buffer = '-'; // this will be overwritten by the null if the number is positive
+  buffer -= is_positive;
+  int length = (int)(buffer - buf_start + 1);
+  buffer[1] = '\0';
+	
+	// reverses the string
+	while(buffer > buf_start) {
+		char temp = *buf_start;
+		*(buf_start++) = *buffer;
+		*(buffer--) = temp;
+	}
+	
+	return length;
 }
