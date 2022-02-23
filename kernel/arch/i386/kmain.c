@@ -19,9 +19,10 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
 
     // extract relevant info from the multiboot header
     multiboot_size = *((uint32_t *)multiboot_addr);
+    printf("Multiboot size is: 0x%x bytes\n", multiboot_size);
     for (tag = (struct multiboot_tag *)(multiboot_addr + 8); tag->type != MULTIBOOT_TAG_TYPE_END; tag = (struct multiboot_tag *)((multiboot_uint8_t *)tag + ((tag->size + 7) & ~7)))
     {
-        
+
     }
 
     // now we have to get to x86_64...

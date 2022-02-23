@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdarg.h>
+#include <stdlib.h>
 
 #ifdef __kernel_libk
 #include <driver/vga/vga.h>
@@ -47,4 +49,80 @@ int puts(const char *s) {
 
     putchar('\n');
     return 1;
+}
+
+int printint(int x, unsigned int base) {
+    char buffer[20] = {0};
+    int str_len = sitoa(buffer, x, base);
+    for(int i = 0; i < str_len; i++) {
+        putchar(buffer[i]);
+    }
+
+    return str_len;
+}
+
+int printuint(unsigned int x, unsigned int base) {
+    char buffer[20] = {0};
+    int str_len = uitoa(buffer, x, base);
+    for(int i = 0; i < str_len; i++) {
+        putchar(buffer[i]);
+    }
+
+    return str_len;
+}
+
+int printf(const char* restrict fmt, ...) {
+    int count = 0;
+    va_list args;
+    va_start(args, fmt);
+
+    char c = '0';
+
+    while((c = *fmt++) != 0) {
+        if(c != '%') {
+            count++;
+            putchar(c);
+        } else {
+            c = *fmt++;
+            char* str_buf;
+
+            switch(c) {
+                case '%':
+                    count++;
+                    putchar('%');
+                    break;
+                case 'd':
+                case 'i':
+                    count += printint(va_arg(args, int), 10);
+                    break;
+                case 'o':
+                    count += printuint(va_arg(args, unsigned int), 8);
+                    break;
+                case 'u':
+                    count += printuint(va_arg(args, unsigned int), 10);
+                    break;
+                case 'x':
+                case 'X':
+                    count += printuint(va_arg(args, unsigned int), 16);
+                    break;
+                case 's':
+                    str_buf = va_arg(args, char*);
+
+                    if(!str_buf)
+                        str_buf = "(null)";
+
+                    for(;*str_buf; str_buf++) {
+                        count++;
+                        putchar(*str_buf);
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    va_end(args);
+    return count;
 }

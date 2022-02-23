@@ -47,5 +47,6 @@ int remove(const char *filename);
 
 int putchar(int c);
 int puts(const char *s);
+int printf(const char* restrict fmt, ...);
 
 #endif // _STDIO_H
