@@ -1,6 +1,7 @@
 {
     "cmake.configureOnOpen": false,
     "files.associations": {
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "multiboot2.h": "c"
     },
 }

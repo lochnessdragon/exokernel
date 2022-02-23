@@ -21,6 +21,11 @@ entry:
   ;mov eax, 0xCAFEBABE ; tells us that the operating system has initialized correctly
   ; initialize the stack
   mov esp, kernel_stack + KERNEL_STACK_SIZE   ; point esp to the start of the stack.
+
+  ; push the multiboot information to the stack to be used by the c function
+  push eax
+  push ebx
+
   ; jump to a c function
   call kmain
   cli
