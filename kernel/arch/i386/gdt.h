@@ -18,8 +18,8 @@ typedef struct gdt_entry {
 } packed_struct gdt_entry;
 
 typedef struct gdt_ptr {
-    uint32_t address;
     uint16_t size;
+    uint32_t address;
 } packed_struct gdt_ptr;
 
 // size protections
@@ -63,8 +63,17 @@ _Static_assert (sizeof(gdt_ptr)==6, "The gdt pointer must be 6 bytes in length."
  */
 
 void initialize_gdt();
-
-extern void load_gdtr(gdt_ptr ptr);
 void set_gdt_entry(int index, uint32_t base, uint32_t size, uint8_t access, uint8_t flags);
+
+// asssembly subroutinues
+extern void load_gdtr(gdt_ptr ptr);
+
+// note for the next function, multiply the index of the segment by 8 to get the offset.
+extern void load_data_segs(uint16_t offset);
+
+// this function loads the code segment as the first segment after the null segment
+// if someone can get it to take arbitrary offsets, that would be great
+// but idk how to do that.
+extern void load_code_seg();
 
 #endif // _GDT_H

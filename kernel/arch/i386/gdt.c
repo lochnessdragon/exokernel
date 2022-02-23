@@ -41,18 +41,23 @@ void set_gdt_entry(int index, uint32_t base, uint32_t size, uint8_t access, uint
 
 void initialize_gdt()
 {
-    _gdt_table.address = (uint32_t)_gdt_entries;
+    _gdt_table.address = (uint32_t)&_gdt_entries[0];
     _gdt_table.size = (sizeof(gdt_entry) * MAX_GDT_ENTRIES) - 1; // can't forget the minus 1
 
     // load in a null gdt entry
     set_gdt_entry(0, 0, 0, 0, 0);
 
-    // load in a data descriptor (fill the entire address space)
-    set_gdt_entry(0, 0, 0xffffffff, GDT_ACCESS_READWRITE | GDT_ACCESS_PRESENT | GDT_ACCESS_CODEDATA, GDT_EXTRA_32BIT | GDT_EXTRA_4K_GRANULARITY);
+    // load in a code descriptor (must have an offset of 1 for the load_code_seg function)
+    set_gdt_entry(1, 0, 0xfffff, GDT_ACCESS_READWRITE | GDT_ACCESS_PRESENT | GDT_ACCESS_CODEDATA | GDT_ACCESS_EXEC_SEG, GDT_EXTRA_32BIT | GDT_EXTRA_4K_GRANULARITY);
 
-    // load in a code descriptor
-    set_gdt_entry(0, 0, 0xffffffff, GDT_ACCESS_READWRITE | GDT_ACCESS_PRESENT | GDT_ACCESS_CODEDATA | GDT_ACCESS_EXEC_SEG, GDT_EXTRA_32BIT | GDT_EXTRA_4K_GRANULARITY);
+    // load in a data descriptor (fill the entire address space)
+    set_gdt_entry(2, 0, 0xfffff, GDT_ACCESS_READWRITE | GDT_ACCESS_PRESENT | GDT_ACCESS_CODEDATA, GDT_EXTRA_32BIT | GDT_EXTRA_4K_GRANULARITY);
 
     // finally, load the gdt into the gdtr
     load_gdtr(_gdt_table);
+
+    // load in the correct segment for data descriptors
+    load_data_segs(2 * sizeof(gdt_entry));
+    // farjump to fix cs
+    load_code_seg();
 }
