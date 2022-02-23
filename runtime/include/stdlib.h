@@ -1,8 +1,6 @@
 #ifndef _STDLIB_H
 #define _STDLIB_H
 
-#include "null.h"
-
 #define EXIT_FAILURE 0
 #define EXIT_SUCCESS 1
 

@@ -7,7 +7,7 @@
  */
 
 // size_t define (see 7.19.1)
-#include "size_t.h"
+#include <stddef.h>
 
 #ifndef __kernel_libk
 // FILE struct
@@ -24,7 +24,6 @@ typedef unsigned long fpos_t;
 #endif
 
 // NULL type (see 7.19.1)
-#include "null.h"
 
 #ifndef __kernel_libk
 extern FILE* __STDIN; // 0 
