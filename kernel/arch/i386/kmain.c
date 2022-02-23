@@ -22,7 +22,47 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
     printf("Multiboot size is: 0x%x bytes\n", multiboot_size);
     for (tag = (struct multiboot_tag *)(multiboot_addr + 8); tag->type != MULTIBOOT_TAG_TYPE_END; tag = (struct multiboot_tag *)((multiboot_uint8_t *)tag + ((tag->size + 7) & ~7)))
     {
+        printf("Tag: 0x%x, Size 0x%x\n", tag->type, tag->size);
 
+        switch (tag->type)
+        {
+        case MULTIBOOT_TAG_TYPE_CMDLINE:;
+            struct multiboot_tag_string *cmdline = (struct multiboot_tag_string *)tag;
+            printf("Command line: %s \n", cmdline->string);
+            break;
+        case MULTIBOOT_TAG_TYPE_BOOT_LOADER_NAME:;
+            struct multiboot_tag_string *boot_name = (struct multiboot_tag_string *)tag;
+            printf("Bootloader name: %s \n", boot_name->string);
+            break;
+        case MULTIBOOT_TAG_TYPE_BASIC_MEMINFO:;
+            struct multiboot_tag_basic_meminfo *meminfo = (struct multiboot_tag_basic_meminfo *)tag;
+            printf("mem_lower = %uKB, mem_upper = %uKB\n", meminfo->mem_lower, meminfo->mem_upper);
+            break;
+        case MULTIBOOT_TAG_TYPE_BOOTDEV:;
+            struct multiboot_tag_bootdev *bootdev = (struct multiboot_tag_bootdev *)tag;
+            printf("Boot device: 0x%x, %u, %u\n", bootdev->biosdev, bootdev->slice, bootdev->part);
+            break;
+        case MULTIBOOT_TAG_TYPE_MMAP:;
+            struct multiboot_tag_mmap *mmap_tag = (struct multiboot_tag_mmap *)tag;
+            multiboot_memory_map_t *memorymap;
+            for (memorymap = mmap_tag->entries; (uint8_t *)memorymap < ((uint8_t *)tag + tag->size); memorymap = (multiboot_memory_map_t *)((unsigned long)memorymap + mmap_tag->entry_size))
+            {
+                printf (" base_addr = 0x%x%x,"
+                      " length = 0x%x%x, type = 0x%x\n",
+                      (unsigned) (memorymap->addr >> 32),
+                      (unsigned) (memorymap->addr & 0xffffffff),
+                      (unsigned) (memorymap->len >> 32),
+                      (unsigned) (memorymap->len & 0xffffffff),
+                      (unsigned) memorymap->type);
+            }
+            break;
+        case MULTIBOOT_TAG_TYPE_NETWORK:;
+            struct multiboot_tag_network* network = (struct multiboot_tag_network*) tag;
+            printf("Network DHCP: %d\n", network->dhcpack);
+            break;
+        default:
+            break;
+        }
     }
 
     // now we have to get to x86_64...
