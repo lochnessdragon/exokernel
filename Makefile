@@ -18,7 +18,8 @@ LFLAGS=
 
 CC=gcc 
 CFLAGS=
-K32_CFLAGS=-m32 -Iruntime/include/ -ffreestanding -fno-stack-protector -nostartfiles -nodefaultlibs -fno-pie -Wall -Wextra -Werror -mno-red-zone -mno-mmx -mno-sse -mno-sse2
+# could optimize by only including general registers on idts.
+K32_CFLAGS=-m32 -Iruntime/include/ -ffreestanding -fno-stack-protector -nostartfiles -nodefaultlibs -fno-pie -Wall -Wextra -Werror -mno-red-zone -mno-mmx -mno-sse -mno-sse2 -mgeneral-regs-only
 
 OBJDIR=build-int/
 BINDIR=build/

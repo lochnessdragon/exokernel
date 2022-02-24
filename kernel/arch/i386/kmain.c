@@ -5,6 +5,7 @@
 #include <common/multiboot2.h>
 #include "compat_checks.h"
 #include <driver/serial/serial.h>
+#include "idt.h"
 
 void kmain(unsigned long multiboot_addr, unsigned int magic)
 {
@@ -93,7 +94,10 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
     puts("[ OK ] Initial x86 GDT setup!");
 
     // initialize interrupts
-    
+    initialize_interrupts();
+    puts("[ OK ] Initialized x86 interrupts!");
+    //gen_interrupt(0x80);
+
     // initialize the PIC and PIT
 
     // load the kernel
