@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+bool processor_is_supported();
+
 bool can_use_cpuid();
 bool is_x86_64_available();
 

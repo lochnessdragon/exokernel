@@ -4,11 +4,13 @@
 #include "gdt.h"
 #include <common/multiboot2.h>
 #include "compat_checks.h"
+#include <driver/serial/serial.h>
 
 void kmain(unsigned long multiboot_addr, unsigned int magic)
 {
     struct multiboot_tag *tag;
     uint32_t multiboot_size;
+    initialize_serial();
 
 		// check if we were loaded by a multiboot compliant bootloader.
     if (magic != MULTIBOOT2_BOOTLOADER_MAGIC)
@@ -17,16 +19,8 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
         return;
     }
 
-		if(!can_use_cpuid()) {
-			puts("[ ERR ] CPUID is not supported, so we can not check the processor for supported features!");
-			return;
-		}
-		
-		// check if x64 is available
-		if(!is_x86_64_available()) {
-			puts("[ ERR ] x64 is not available on this computer, please install the exokernel on a computer with the amd64 architecture.");
-			return;
-		}
+    // check for things like long mode, PAE, MMX and SSE
+    if(!processor_is_supported()) return;
 	
     // extract relevant info from the multiboot header
     multiboot_size = *((uint32_t *)multiboot_addr);
@@ -71,6 +65,22 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
             struct multiboot_tag_network* network = (struct multiboot_tag_network*) tag;
             printf("Network DHCP: %d\n", network->dhcpack);
             break;
+        case MULTIBOOT_TAG_TYPE_APM:;
+            struct multiboot_tag_apm* apm = (struct multiboot_tag_apm*) tag;
+            printf("APM: version = 0x%x\n", apm->version);
+            break;
+        case MULTIBOOT_TAG_TYPE_LOAD_BASE_ADDR:;
+            struct multiboot_tag_load_base_addr* base_addr = (struct multiboot_tag_load_base_addr*) tag;
+            printf("Base address load: 0x%x\n", base_addr->load_base_addr);
+            break;
+        case MULTIBOOT_TAG_TYPE_FRAMEBUFFER:;
+            struct multiboot_tag_framebuffer* framebuffer = (struct multiboot_tag_framebuffer*) tag;
+            printf("Framebuffer: width = %d height = %d\n", framebuffer->common.framebuffer_width, framebuffer->common.framebuffer_height);
+            break;
+        case MULTIBOOT_TAG_TYPE_ELF_SECTIONS:;
+            struct multiboot_tag_elf_sections* elf_sections = (struct multiboot_tag_elf_sections*) tag;
+            printf("Elf sections: number = %d entry size = %d shndx = %d\n", elf_sections->num, elf_sections->num, elf_sections->shndx);
+            break;
         default:
             break;
         }
@@ -83,11 +93,8 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
     puts("[ OK ] Initial x86 GDT setup!");
 
     // initialize interrupts
-    puts("[ OK ] Initial interrupt routinues setup!");
-
+    
     // initialize the PIC and PIT
-
-    // initialize memory paging
 
     // load the kernel
 

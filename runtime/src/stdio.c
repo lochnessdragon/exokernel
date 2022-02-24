@@ -5,6 +5,7 @@
 
 #ifdef __kernel_libk
 #include <driver/vga/vga.h>
+#include <driver/serial/serial.h>
 #else
 #include <unistd.h>
 #endif
@@ -35,6 +36,7 @@ int remove(const char* filename) {
 int putchar(int c) {
     #ifdef __kernel_libk
     vga_append_char(c);
+    serial_write_char(c);
     #else 
     write((*stdout).fd, &c, 1);
     #endif

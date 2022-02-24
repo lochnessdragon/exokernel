@@ -21,6 +21,7 @@ outportb:
 inportb:
     ;push dx 				; save registers
 	mov dx, [esp + 4] 		; move the address of the I/O port into the dx register.
-	in ax, dx 				; read the byte from the I/O port
+    xor eax, eax            ; clear the eax registers for use as a return 
+	in al, dx 				; read the byte from the I/O port
 	;pop dx					; load registers
     ret

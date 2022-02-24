@@ -56,7 +56,7 @@ bochs: $(BINDIR)os.iso
 
 .PHONY:
 qemu: $(BINDIR)os.iso
-	qemu-system-x86_64 -cdrom build/os.iso -monitor stdio
+	qemu-system-x86_64 -cdrom build/os.iso -monitor stdio -D qemu.log -d guest_errors,pcall
 	@echo
 
 .PHONY:
