@@ -95,14 +95,22 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
 
     // initialize interrupts
     initialize_interrupts();
-    puts("[ OK ] Initialized x86 interrupts!");
-    gen_interrupt(0x80);
+
+    // add exception vectors
 
     // initialize the PIC and PIT
 
-    // load the kernel
+    enable_interrupts();
+    puts("[ OK ] Initialized x86 interrupts!");
 
-    // switch into x86_64
+    // set up x64 gdt and idt
+    // initialize x64 TSS
+    // initialize x64 4 level paging (but do not enable)
+    // enable PAE
+    // load CR3
+    // enable long mode
+    // enable paging and jump into long mode w/ compatibility mode on!
+    // switch into totally x64
 
     // jump to the kernel
 }
