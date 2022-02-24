@@ -2,6 +2,8 @@
     "cmake.configureOnOpen": false,
     "files.associations": {
         "unistd.h": "c",
-        "multiboot2.h": "c"
+        "multiboot2.h": "c",
+        "common_exceptions.h": "c",
+        "stdio.h": "c"
     },
 }

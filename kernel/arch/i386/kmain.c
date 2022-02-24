@@ -6,6 +6,7 @@
 #include "compat_checks.h"
 #include <driver/serial/serial.h>
 #include "idt.h"
+#include "common_exceptions.h"
 
 void kmain(unsigned long multiboot_addr, unsigned int magic)
 {
@@ -97,6 +98,7 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
     initialize_interrupts();
 
     // add exception vectors
+    install_exception_handlers();
 
     // initialize the PIC and PIT
 
