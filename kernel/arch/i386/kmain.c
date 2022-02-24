@@ -96,7 +96,7 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
     // initialize interrupts
     initialize_interrupts();
     puts("[ OK ] Initialized x86 interrupts!");
-    //gen_interrupt(0x80);
+    gen_interrupt(0x80);
 
     // initialize the PIC and PIT
 
