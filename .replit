@@ -1,2 +1,2 @@
 language = "nix"
-run = "make all && ./run_os_qemu.sh"
+run = "make qemu"

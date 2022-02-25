@@ -32,3 +32,11 @@ gen_interrupt:
 genint:
 	int 	0
 	ret
+
+global divide_by_zero
+divide_by_zero:
+	mov eax, 20
+	mov edx, 0
+	mov ecx, 0
+	div ecx
+	ret

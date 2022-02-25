@@ -20,11 +20,17 @@ char* fb = (char*)VGA_MEM;
 unsigned char cursor_x = 0;
 unsigned char cursor_y = 0;
 
-void vga_set_cell(char c, char attrib_byte) {
-    int offset = (cursor_x*2) + (cursor_y * COLS * 2);
+void vga_set_cell(int x, int y, char c, char attrib_byte) {
+    int offset = (x*2) + (y * COLS * 2);
 
     fb[offset] = c;
     fb[offset+1] = attrib_byte;
+}
+
+uint16_t vga_get_cell(int x, int y) {
+	int offset = (x * 2) + (y * COLS * 2);
+
+	return (fb[offset] << 8) | fb[offset+1];
 }
 
 void vga_append_char(char c) {
@@ -35,10 +41,11 @@ void vga_append_char(char c) {
     }
 
     if(cursor_y >= LINES) {
-		cursor_y = 0;
+			vga_scroll();
+		cursor_y -= 1;
 	}
 
-	vga_set_cell (c, TEXT_ATTRIB);
+	vga_set_cell (cursor_x, cursor_y, c, TEXT_ATTRIB);
 	cursor_x++;
 	if(cursor_x >= COLS) {
 		cursor_x = 0;
@@ -65,4 +72,17 @@ void vga_hardware_cursor(unsigned char x, unsigned char y) {
     outportb(FB_DATA_PORT,    ((pos >> 8) & 0x00FF));
     outportb(FB_COMMAND_PORT, FB_LOW_BYTE_COMMAND);
     outportb(FB_DATA_PORT,    pos & 0x00FF);
+}
+
+void vga_scroll() {
+	for(int y = 0; y < LINES-1; y++) {
+		for(int x = 0; x < COLS; x++) {
+			uint32_t replacement = vga_get_cell(x, y+1);
+			vga_set_cell(x, y, (char) ((replacement >> 8) & 0x00ff), (char) (replacement & 0x00ff));
+		}
+	}
+	// null out the last line
+	for(int x = 0; x < COLS; x++) {
+		vga_set_cell(x, LINES - 1, 0, TEXT_ATTRIB);
+	}
 }

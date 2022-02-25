@@ -80,6 +80,7 @@ int install_interrupt(uint32_t index, uint16_t flags, uint16_t selector, irq_han
 extern void enable_interrupts();
 extern void disable_interrupts();
 extern void load_idtr(idt_ptr ptr);
+extern void divide_by_zero();
 void gen_interrupt(int interrupt_number);
 
 #endif // _IDT_H
