@@ -6,5 +6,6 @@
 			pkgs.grub2
 			pkgs.xorriso
 			pkgs.qemu
+			pkgs.bochs
   ];
 }
