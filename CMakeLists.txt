@@ -27,7 +27,7 @@ set(CMAKE_ASM_NASM_OBJECT_FORMAT elf32)
 set(CMAKE_ASM_NASM_FLAGS "${CMAKE_ASM_NASM_FLAGS} -f ${CMAKE_ASM_NASM_OBJECT_FORMAT}")
 
 file(GLOB_RECURSE KCSRC "kernel/*.c")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -fno-pie -mno-red-zone")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32 -ffreestanding -fno-stack-protector -nostartfiles -nodefaultlibs -fno-pie -Wall -Wextra -Werror -mno-red-zone -mno-mmx -mno-sse -mno-sse2 -mgeneral-regs-only")
 
 set(KFILES ${KASMSRC} ${KCSRC})
 

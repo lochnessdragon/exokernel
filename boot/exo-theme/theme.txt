@@ -1,0 +1,25 @@
+title-text: "Boot loader"
+title-color: "#113399"
+
+#boot menu
++ boot_menu {
+	left = 10%
+	width = 80%
+	top = 20%
+	height = 75%	
+	#item_font = "DejaVu Sans Regular 12"
+	item_color = "#000"
+	#selected_item_font = "DejaVu Sans Bold 14"
+	selected_item_color= "#555"
+	#selected_item_pixmap_style = "blob_*.png"
+	icon_height = 25
+	icon_width = 25
+	item_height = 26
+	item_padding = 0
+	item_icon_space = 0
+	item_spacing = 1
+	scrollbar = true
+	scrollbar_width = 20
+	#scrollbar_thumb = "slider_*.png"
+	#menu_pixmap_style = "boot_menu_*.png"
+}

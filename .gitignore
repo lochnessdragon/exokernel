@@ -54,6 +54,7 @@ dkms.conf
 # CMake build folder
 build/
 build-int/
+cmake-build/
 
 # log files
 bochslog.txt

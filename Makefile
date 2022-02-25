@@ -43,20 +43,22 @@ dir := kernel/
 include kernel/kernel.mk 
 
 # make the hard drive/cdrom images
-$(BINDIR)os.iso: $(KERNEL_BINDIR)kernel.elf
-	@mkdir -p $(BINDIR)iso/boot/grub
-	@cp $(KERNEL_BINDIR)kernel.elf $(BINDIR)iso/boot/
-	@cp boot/grub.cfg $(BINDIR)iso/boot/grub
-	@grub-mkrescue -o $(BINDIR)os.iso $(BINDIR)iso/
+.PHONY:
+os.iso: $(KERNEL_BINDIR)kernel.elf 
+	mkdir -p $(BINDIR)iso/boot/grub/themes/
+	cp $(KERNEL_BINDIR)kernel.elf $(BINDIR)iso/boot/
+	cp boot/grub.cfg $(BINDIR)iso/boot/grub
+	cp -r boot/exo-theme $(BINDIR)iso/boot/grub/themes
+	grub-mkrescue -o $(BINDIR)os.iso $(BINDIR)iso/
 	@echo $(COLOR_SUCCESS)Made os iso image!$(COLOR_CLR) 🚀 # <- yes, that is an emoji
 
 # commands to run the emulators
 .PHONY:
-bochs: $(BINDIR)os.iso
+bochs: os.iso
 	bochs -f bochsrc.txt
 
 .PHONY:
-qemu: $(BINDIR)os.iso
+qemu: os.iso
 	qemu-system-x86_64 -cdrom build/os.iso -monitor stdio -D qemu.log -d guest_errors,pcall
 	@echo
 
