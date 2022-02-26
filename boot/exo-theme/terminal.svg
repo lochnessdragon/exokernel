@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="36"
+   height="36"
+   viewBox="0 0 9.5249998 9.5250003"
+   version="1.1"
+   id="svg26491"
+   inkscape:version="1.1.2 (76b9e6a115, 2022-02-25)"
+   sodipodi:docname="terminal.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview26493"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     units="px"
+     width="36px"
+     inkscape:zoom="15.139974"
+     inkscape:cx="1.2549559"
+     inkscape:cy="11.063427"
+     inkscape:window-width="1294"
+     inkscape:window-height="704"
+     inkscape:window-x="72"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2">
+    <inkscape:grid
+       type="xygrid"
+       id="grid293"
+       empspacing="2"
+       originx="0.13229167"
+       originy="0.13229167" />
+  </sodipodi:namedview>
+  <defs
+     id="defs26488">
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter1029"
+       x="-0.28346458"
+       y="-0.28346458"
+       width="1.5669292"
+       height="1.5669292">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood1019" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite1021" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="1"
+         result="blur"
+         id="feGaussianBlur1023" />
+      <feOffset
+         dx="0"
+         dy="0"
+         result="offset"
+         id="feOffset1025" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite1027" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <rect
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.264583;filter:url(#filter1029)"
+       id="rect28"
+       width="8.4666662"
+       height="8.4666662"
+       x="0.52916676"
+       y="0.52916664"
+       rx="1.5875"
+       ry="1.5875" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Sections"
+     style="display:inline">
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="terminal_nw"
+       width="2.9104166"
+       height="2.9104166"
+       x="0.13229167"
+       y="0.13229167" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="terminal_n"
+       width="2.9104166"
+       height="2.9104166"
+       x="3.307292"
+       y="0.13229167" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="terminal_ne"
+       width="2.9104166"
+       height="2.9104166"
+       x="6.4822912"
+       y="0.13229167" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="terminal_e"
+       width="2.9104166"
+       height="2.9104166"
+       x="6.4822922"
+       y="3.3072917" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="terminal_se"
+       width="2.9104166"
+       height="2.9104166"
+       x="6.4822917"
+       y="6.4822917" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="terminal_s"
+       width="2.9104166"
+       height="2.9104166"
+       x="3.3072915"
+       y="6.4822917" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="terminal_sw"
+       width="2.9104166"
+       height="2.9104166"
+       x="0.13229167"
+       y="6.4822917" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="terminal_w"
+       width="2.9104166"
+       height="2.9104166"
+       x="0.13229167"
+       y="3.3072917" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="terminal_c"
+       width="2.9104166"
+       height="2.9104166"
+       x="3.3072917"
+       y="3.3072917" />
+  </g>
+</svg>

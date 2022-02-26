@@ -1,10 +1,14 @@
 # title settings
-title-text: "Boot Menu"
+title-text: "Boot menu"
 title-font: "Ubuntu Mono Regular 32"
 title-color: "black"
-terminal-width: "100%"
-terminal-height: "100%"
+terminal-top: "0"
+terminal-left: "0"
+terminal-width: "80%"
+terminal-height: "80%"
 terminal-font: "unicode"
+#terminal-color: "lime"
+terminal-box: "terminal_*.png"
 
 # background settings 
 desktop-color: "white"
@@ -30,4 +34,121 @@ desktop-image: "background.png"
 	# scrollbar settings 
 	scrollbar=true
 
+}
+
+# loading bar to show boot progress
++ circular_progress {
+	id="__timeout__"
+	center_bitmap="circular_progress_center.png"
+	tick_bitmap="circular_progress_tick.png"
+	num_ticks=45
+	left=50%-16
+    top=94%
+}
+
++ label {
+	id="__timeout__"
+	font="Ubuntu Mono Regular 16"
+	color="black"
+	top=91%
+	left=25%+75
+	visible=true
+}
+
++ label {
+	id="__timeout__"
+	text="s till the default entry runs."
+	font="Ubuntu Mono Regular 16"
+	color="black"
+	top=91%
+	left=25%+91
+}
+
+# command prompts to show available options
++ vbox {
+	top=80%
+	left=26%
+
+	+ hbox {
+
+		# c to open command line
+		+ image {
+			file="terminal-icon.png"
+		}
+
+		# spacing
+		+ label {
+			text=" "
+			font="Ubuntu Mono Regular 32"
+			color="black"
+		}
+
+		+ image {
+			file="key-c.png"
+		}
+
+		+ label {
+			text=" cmd     "
+			font="Ubuntu Mono Regular 32"
+			color="black"
+		}
+
+		# e to edit config
+		+image {
+			file="edit-icon.png"
+		}
+
+		# spacing
+		+ label {
+			text=" "
+			font="Ubuntu Mono Regular 32"
+			color="black"
+		}
+
+		+image {
+			file="key-e.png"
+		}
+
+		+ label {
+			text=" cnfg "
+			font="Ubuntu Mono Regular 32"
+			color="black"
+		}
+	}
+
+	+ hbox {
+		# arrow keys up and down to choose menu item 
+
+		+image {
+			file="key-up-arrow.png"
+		}
+
+		# spacing
+		+ label {
+			text=" "
+			font="Ubuntu Mono Regular 32"
+			color="black"
+		}
+
+		+image {
+			file="key-down-arrow.png"
+		}
+
+		+ label {
+			text=" select  "
+			font="Ubuntu Mono Regular 32"
+			color="black"
+		}
+
+		# enter or right arrow to boot menu item
+		+ image {
+			file="key-enter.png"
+		}
+
+		+ label {
+			text=" run"
+			font="Ubuntu Mono Regular 32"
+			color="black"
+		}
+	}
 }
