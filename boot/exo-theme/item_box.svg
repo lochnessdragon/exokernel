@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 6.3499998 6.3499998"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (76b9e6a115, 2022-02-25)"
+   sodipodi:docname="item_box.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     width="24px"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="11.377444"
+     inkscape:cx="-1.0107719"
+     inkscape:cy="15.249471"
+     inkscape:window-width="1294"
+     inkscape:window-height="704"
+     inkscape:window-x="72"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2"
+     units="px"
+     inkscape:snap-midpoints="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid55"
+       originx="0.13229166"
+       originy="0.13229166"
+       empspacing="1" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-1.381093,-0.3469255)">
+    <rect
+       style="fill:#b3b3b3;fill-rule:evenodd;stroke-width:0.264583"
+       id="rect31"
+       width="6.3499999"
+       height="6.3499999"
+       x="1.381093"
+       y="0.3469255"
+       rx="1.0583333"
+       ry="1.0583333" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Section Split"
+     style="display:none">
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="item_box_nw"
+       width="1.8520833"
+       height="1.8520833"
+       x="0.13229166"
+       y="0.13229166" />
+    <rect
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="item_box_n"
+       width="1.8520833"
+       height="1.8520833"
+       x="2.2489583"
+       y="0.13229166" />
+    <rect
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="item_box_ne"
+       width="1.8520833"
+       height="1.8520833"
+       x="4.3656249"
+       y="0.13229164" />
+    <rect
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="item_box_e"
+       width="1.8520833"
+       height="1.8520833"
+       x="4.3656249"
+       y="2.2489583" />
+    <rect
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="item_box_se"
+       width="1.8520833"
+       height="1.8520833"
+       x="4.3656249"
+       y="4.3656249" />
+    <rect
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="item_box_s"
+       width="1.8520833"
+       height="1.8520833"
+       x="2.2489583"
+       y="4.3656249" />
+    <rect
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="item_box_c"
+       width="1.8520833"
+       height="1.8520833"
+       x="2.2489583"
+       y="2.2489583" />
+    <rect
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="item_box_w"
+       width="1.8520833"
+       height="1.8520833"
+       x="0.13229172"
+       y="2.2489583" />
+    <rect
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+       id="item_box_sw"
+       width="1.8520833"
+       height="1.8520833"
+       x="0.13229167"
+       y="4.3656249" />
+  </g>
+</svg>

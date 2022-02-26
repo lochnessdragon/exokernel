@@ -48,7 +48,9 @@ os.iso: $(KERNEL_BINDIR)kernel.elf
 	mkdir -p $(BINDIR)iso/boot/grub/themes/
 	cp $(KERNEL_BINDIR)kernel.elf $(BINDIR)iso/boot/
 	cp boot/grub.cfg $(BINDIR)iso/boot/grub
+	rm -rf $(BINDIR)iso/boot/grub/themes/exo-theme
 	cp -r boot/exo-theme $(BINDIR)iso/boot/grub/themes
+	cp -r boot/fonts $(BINDIR)iso/boot/grub/
 	grub-mkrescue -o $(BINDIR)os.iso $(BINDIR)iso/
 	@echo $(COLOR_SUCCESS)Made os iso image!$(COLOR_CLR) 🚀 # <- yes, that is an emoji
 
@@ -57,9 +59,10 @@ os.iso: $(KERNEL_BINDIR)kernel.elf
 bochs: os.iso
 	bochs -f bochsrc.txt
 
+#-D qemu.log -d guest_errors,pcall
 .PHONY:
 qemu: os.iso
-	qemu-system-x86_64 -cdrom build/os.iso -monitor stdio -D qemu.log -d guest_errors,pcall
+	qemu-system-x86_64 -cdrom build/os.iso -monitor stdio 
 	@echo
 
 .PHONY:

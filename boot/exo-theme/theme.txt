@@ -1,25 +1,33 @@
-title-text: "Boot loader"
-title-color: "#113399"
+# title settings
+title-text: "Boot Menu"
+title-font: "Ubuntu Mono Regular 32"
+title-color: "black"
+terminal-width: "100%"
+terminal-height: "100%"
+terminal-font: "unicode"
+
+# background settings 
+desktop-color: "white"
+desktop-image: "background.png"
 
 #boot menu
 + boot_menu {
-	left = 10%
-	width = 80%
-	top = 20%
-	height = 75%	
-	#item_font = "DejaVu Sans Regular 12"
-	item_color = "#000"
-	#selected_item_font = "DejaVu Sans Bold 14"
-	selected_item_color= "#555"
-	#selected_item_pixmap_style = "blob_*.png"
-	icon_height = 25
-	icon_width = 25
-	item_height = 26
-	item_padding = 0
-	item_icon_space = 0
-	item_spacing = 1
-	scrollbar = true
-	scrollbar_width = 20
-	#scrollbar_thumb = "slider_*.png"
-	#menu_pixmap_style = "boot_menu_*.png"
+	item_font="Ubuntu Mono Regular 16"
+	selected_item_font="Ubuntu Mono Bold 16"
+	item_color="black"
+	selected_item_color="white"
+	item_padding=36
+	item_spacing=24
+	menu_pixmap_style="menu_box_*.png"
+	item_pixmap_style="item_box_*.png"
+	selected_item_pixmap_style="selected_item_box_*.png"
+
+	left=25%
+	top=25%
+	height=50%
+	width=50%
+
+	# scrollbar settings 
+	scrollbar=true
+
 }
