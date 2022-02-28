@@ -1,5 +1,30 @@
 # Design Document for the Exokernel
 
+It is my hope that this design document can provide a sort of overview and a technical layout of the goals of this project. Hopefully, with this design document, I can lay out the vision of the project and necessary components of that vision.
+
+## Overview
+
+## Context
+
+## Goals and non goals
+
+## Milestones
+
+## Existing Solution
+Talk about how users interact with this system and/or how data flows through it
+
+## Proposed Solution
+
+## Alternative Solutions
+
+## Testability/Monitoring/Alerting
+
+## Cross team impact
+
+## Open Questions
+
+## Detailed Scoping and Timeline
+
 ## 1. Problems
 
 - How to we define the libOS interface?
