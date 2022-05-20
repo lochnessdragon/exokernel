@@ -34,8 +34,15 @@ The kernel will expose these syscalls to the library operating system (We have r
 ```int bind_resource(int name);```
 ```int revoke_resource(int handle);```
 
+When a resource has been requested by a specific application, it will be bound to that application and will not be able to be used by other applications/processes.
+
+We also want a visible revocation of certain resources. (like cpu time) This would involve a signal to the process that it needs to clean up its structures and get ready for a resource to be revoked, potentially following the UNIX signal pattern.
+
+```int revocation_request(int handle);```
+``` int bind_signal(REVOC_REQ, revocation_request);```
+
 ## 4. The LibOS Interface
 Library OS's will be dynamically linked to the application at runtime in most cases. This will allow them to be shared between applications on the computer. Of course, when I reference a library os, I mean the piece of code that provides abstractions for other code. Therefore, applications could be compiled without the need for an exokernel and therefore could be targeted to this specific os. Due to the dynamic nature of operating system abstractions these days, I will not be defining a base series of abstractions that each lib os has to have. However, I will define a few functions that need to be exported for a library os to work.  
 
 ## 5. The UNIX LibOS
-The hope behind this project would also be to create a unix library operating system. The goal is that unix applications would be able to be dragged and dropped onto the operating system and they should be able to run over the unix lib os's abstraction. This would require a c runtime environment, but that should also be able to run over the unix lib os.
+The hope behind this project would also be to create a unix library operating system. The goal is that unix applications would be able to be dragged and dropped onto the operating system and they should be able to run over the unix lib os's abstraction. This would require a c runtime environment, but that should also be able to run over the unix lib os as well.
