@@ -34,16 +34,15 @@ uint16_t vga_get_cell(int x, int y) {
 }
 
 void vga_append_char(char c) {
-    if(c == '\n') {
-        cursor_x = 0;
-        cursor_y++;
-        return;
-    }
-
-    if(cursor_y >= LINES) {
+  if(c == '\n') {
+    cursor_x = 0;
+    cursor_y++;
+		if(cursor_y >= LINES) {
 			vga_scroll();
-		cursor_y -= 1;
-	}
+			cursor_y -= 1;
+		}
+    return;
+  }
 
 	vga_set_cell (cursor_x, cursor_y, c, TEXT_ATTRIB);
 	cursor_x++;
@@ -52,7 +51,7 @@ void vga_append_char(char c) {
 		cursor_y++;
 	}
 
-    vga_hardware_cursor(cursor_x, cursor_y);
+  vga_hardware_cursor(cursor_x, cursor_y);
 }
 
 void vga_write(const char* string, int len) {
@@ -84,5 +83,13 @@ void vga_scroll() {
 	// null out the last line
 	for(int x = 0; x < COLS; x++) {
 		vga_set_cell(x, LINES - 1, 0, TEXT_ATTRIB);
+	}
+}
+
+void clear_vga() {
+	for (int y = 0; y < LINES; y++) {
+		for (int x = 0; x < COLS; x++) {
+			vga_set_cell(x, y, 0, TEXT_ATTRIB);
+		}
 	}
 }

@@ -13,6 +13,7 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
     struct multiboot_tag *tag;
     uint32_t multiboot_size;
     initialize_serial();
+		clear_vga();
 
 		// check if we were loaded by a multiboot compliant bootloader.
     if (magic != MULTIBOOT2_BOOTLOADER_MAGIC)
@@ -29,7 +30,7 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
     printf("Multiboot size is: 0x%x bytes\n", multiboot_size);
     for (tag = (struct multiboot_tag *)(multiboot_addr + 8); tag->type != MULTIBOOT_TAG_TYPE_END; tag = (struct multiboot_tag *)((multiboot_uint8_t *)tag + ((tag->size + 7) & ~7)))
     {
-        printf("Tag: 0x%x, Size 0x%x\n", tag->type, tag->size);
+        //printf("Tag: 0x%x, Size 0x%x\n", tag->type, tag->size);
 
         switch (tag->type)
         {
@@ -43,7 +44,7 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
             break;
         case MULTIBOOT_TAG_TYPE_BASIC_MEMINFO:;
             struct multiboot_tag_basic_meminfo *meminfo = (struct multiboot_tag_basic_meminfo *)tag;
-            printf("mem_lower = %uKB, mem_upper = %uKB\n", meminfo->mem_lower, meminfo->mem_upper);
+            printf("Memory: mem_lower=%uKB, mem_upper=%uKB\n", meminfo->mem_lower, meminfo->mem_upper);
             break;
         case MULTIBOOT_TAG_TYPE_BOOTDEV:;
             struct multiboot_tag_bootdev *bootdev = (struct multiboot_tag_bootdev *)tag;
@@ -52,6 +53,7 @@ void kmain(unsigned long multiboot_addr, unsigned int magic)
         case MULTIBOOT_TAG_TYPE_MMAP:;
             struct multiboot_tag_mmap *mmap_tag = (struct multiboot_tag_mmap *)tag;
             multiboot_memory_map_t *memorymap;
+						printf("Memmap:\n");
             for (memorymap = mmap_tag->entries; (uint8_t *)memorymap < ((uint8_t *)tag + tag->size); memorymap = (multiboot_memory_map_t *)((unsigned long)memorymap + mmap_tag->entry_size))
             {
                 printf (" base_addr = 0x%x%x,"

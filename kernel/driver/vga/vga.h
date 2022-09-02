@@ -9,3 +9,4 @@ void vga_append_char(char c);
 
 void vga_hardware_cursor(unsigned char x, unsigned char y);
 void vga_scroll();
+void clear_vga();
