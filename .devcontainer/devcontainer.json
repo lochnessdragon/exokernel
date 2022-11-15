@@ -1,17 +1,26 @@
 {
   "name": "dev",
-  "image": "mcr.microsoft.com/devcontainers/cpp:0-ubuntu-22.04",
+  
+  "build": {
+	"dockerfile": "Dockerfile"
+  },
+
   "features": {
     "ghcr.io/devcontainers/features/desktop-lite:1": {}
   },
   
   // Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"ms-vscode.cpptools"
-	]
+		"ms-vscode.cpptools",
+		"ms-vscode.makefile-tools",
+		"ms-vscode.cpptools-extension-pack",
+		"ms-azuretools.vscode-docker"
+	],
   
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": [
+		6080
+	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "gcc -v",
