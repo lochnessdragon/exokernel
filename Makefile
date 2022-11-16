@@ -62,7 +62,7 @@ bochs: os.iso
 #-D qemu.log -d guest_errors,pcall
 .PHONY:
 qemu: os.iso
-	qemu-system-x86_64 -cdrom build/os.iso -serial file:serial.log -monitor stdio 
+	qemu-system-x86_64 -boot d -cdrom build/os.iso -serial file:serial.log -monitor stdio 
 	@echo
 
 .PHONY:
