@@ -1,5 +1,6 @@
 # Exokernel
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=459370590)
+[![Run on repl.it](https://repl.it/badge/github/lochnessdragon/exokernel)](https://repl.it/github/lochnessdragon/exokernel}&ref=button)
 Another exokernel project. Hopefully, we can study some pitfalls and shortcomings of exokernels and find solutions with this repo.
 
 ## Usage
