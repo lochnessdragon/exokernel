@@ -23,13 +23,29 @@
 </section>
 
 <!-- Features -->
-<section id="features"></section>
+<section id="features">
+	<h2>Features</h2>
+	<!-- Old OS work like x -->
+	<!-- Our os works like this -->
+	<!-- For users, this means -->
+	<!-- For devs, this means -->
+	<!-- For sysadmins, this means -->
+</section>
 
 <!-- Guides and Documentation -->
-<section id="docs" class="bg-gray-300">
-	<h2>Guides:</h2>
-	<h2>Documentation:</h2>
+<section id="docs" class="bg-gray-900 text-white">
+	<h2 class="font-bold text-4xl">Guides:</h2>
+	<!-- Getting started -->
+	<!-- How to write a lib os -->
+	<!-- Compiling the project -->
+	<h2 class="font-bold text-4xl">Documentation:</h2>
+	<!-- API Documentation -->
 </section>
 
 <!-- Contributing -->
-<section id="contributing"></section>
+<section id="contributing" class="text-white bg-purple-900">
+	<h2 class="font-bold text-4xl">Contributing:</h2>
+	<!-- Contrib souce -->
+	<!-- Code of Conduct -->
+	<!-- Help Q&A -->
+</section>

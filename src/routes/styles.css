@@ -1,3 +1,12 @@
+html {
+	scroll-behavior: smooth;
+}
+
+.navBg {
+	/* bg-gradient-to-br from-indigo-800 to-slate-800  */
+	background-image: linear-gradient(to bottom right, #3730a3, #1c1917);
+}
+
 .basis-content {
 	flex-basis: fit-content;
 }
