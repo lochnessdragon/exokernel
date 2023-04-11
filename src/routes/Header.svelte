@@ -13,6 +13,9 @@
 		<ul class="flex text-slate-500 font-bold">
 			<li class="grow flex-auto basis-1/4 text-center" aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
+				<svg width="18" height="18">
+  				<circle cx="9" cy="9" r="6" stroke="grey" stroke-width="4"/>
+				</svg>
 			</li>
 			<li class="grow flex-auto basis-1/4 text-center"><a href="#features">Features</a></li>
 			<li class="grow flex-auto basis-1/4 text-center"><a href="#docs">Guides</a></li>
