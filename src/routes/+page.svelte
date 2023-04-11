@@ -24,7 +24,7 @@
 
 <!-- Features -->
 <section id="features">
-	<h2>Features</h2>
+	<h2 class="font-bold text-4xl md:text-6xl">Features</h2>
 	<!-- Old OS work like x -->
 	<!-- Our os works like this -->
 	<!-- For users, this means -->
@@ -33,19 +33,22 @@
 </section>
 
 <!-- Guides and Documentation -->
-<section id="docs" class="bg-gray-900 text-white">
-	<h2 class="font-bold text-4xl">Guides:</h2>
+<section id="docs" class="bg-gray-900 text-white pt-4 p-1">
+	<h2 class="font-bold text-4xl md:text-6xl">Guides:</h2>
 	<!-- Getting started -->
 	<!-- How to write a lib os -->
 	<!-- Compiling the project -->
-	<h2 class="font-bold text-4xl">Documentation:</h2>
+	<p>In order to start your journey into the stars, I suggest <a class="underline"><i>The Beginner's Guide by R. U. Reddy</i></a>. If you are a developer looking to compile the project, there's is no better guide than <a class="underline"><i>Birthing your own Exokernel by Bertha Pangs</i></a>. Finally, if you are looking to grow your own library operating system, check out <a class="underline"><i>Cultivating a healthy Library (OS) by Chist M. Dev</i></a>.</p>
+	<h2 class="font-bold text-4xl md:text-6xl">Documentation:</h2>
 	<!-- API Documentation -->
+	<p>Fuddled over functions? Mixed up by methods? Lacking a general sense of direction through the forest of knowledge? Maybe the <a class="underline">Definitely Definitive Dive into the API</a> will help.</p>
 </section>
 
 <!-- Contributing -->
-<section id="contributing" class="text-white bg-purple-900">
-	<h2 class="font-bold text-4xl">Contributing:</h2>
+<section id="contributing" class="text-white bg-purple-900 pt-4 p-1 text-left">
+	<h2 class="font-bold text-4xl md:text-6xl">Contributing:</h2>
 	<!-- Contrib souce -->
 	<!-- Code of Conduct -->
 	<!-- Help Q&A -->
+	<p>All development of the code happens on Github. Make sure to read the Code of Conduct when interacting with the community. Also, if you need help, check out the Q&A discussions.</p>
 </section>
