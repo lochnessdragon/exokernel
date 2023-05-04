@@ -19,7 +19,7 @@ jobs:
 
             # upload the built artifact to be used in the deploy step.
             - name: Upload artifact
-              uses: actions/upload-pages-artifact
+              uses: actions/upload-pages-artifact@v1
               with:
                 path: build/
     # Deploy job
