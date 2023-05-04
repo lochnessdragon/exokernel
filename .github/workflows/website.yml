@@ -3,7 +3,7 @@ on:
     push:
         branches: [ web ]
     # allows us to run the workflow manually
-    #workflow_dispatch:
+    workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -14,9 +14,9 @@ permissions:
 jobs:
     # build job
     build:
-        #environment:
-            #name: github-pages
-            # url: ${{ steps.deployment.outputs.page_url }}
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
