@@ -16,3 +16,7 @@ To switch to this branch after working on the main (or a different branch), run 
 
 Run ```npm run dev``` to run a development server. 
 ```npm run build``` will build the final website.
+
+## Contributing
+
+Contributions welcome!
